@@ -10,6 +10,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class UserService {
   private root= 'http://localhost:5000/api';
+  private url = '/token';
   public loggedIn= false;
   constructor(private http: HttpClient) { }
   loginUser(f) {
@@ -26,7 +27,18 @@ export class UserService {
 
   register() {}
 
-  updateUserInfo() {}
+  getUserInfo(user) {
+    return this.http.post(this.root + this.url + '/user', user,  {
+      headers: new HttpHeaders().set('Content-Type', 'Application/Json')});
+  }
 
-  deleteUserInfo() {}
+  updateUserInfo(user) {
+    this.http.post(this.root + this.url + '/update', user,  {
+      headers: new HttpHeaders().set('Content-Type', 'Application/Json')});
+  }
+
+  deleteUserInfo(user) {
+    this.http.post(this.root + this.url + '/delete', user,  {
+      headers: new HttpHeaders().set('Content-Type', 'Application/Json')});
+  }
 }

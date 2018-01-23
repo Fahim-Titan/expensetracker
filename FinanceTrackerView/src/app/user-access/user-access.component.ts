@@ -35,4 +35,8 @@ export class UserAccessComponent implements OnInit {
     this.isLogin = false;
     console.log('logout');
   }
+
+  getUserInfo(f) {
+    this.userService.getUserInfo(f).subscribe();
+  }
 }
