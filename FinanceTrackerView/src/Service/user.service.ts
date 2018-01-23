@@ -24,4 +24,9 @@ export class UserService {
     localStorage.removeItem('token');
   }
 
+  register() {}
+
+  updateUserInfo() {}
+
+  deleteUserInfo() {}
 }
