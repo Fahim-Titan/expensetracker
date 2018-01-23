@@ -36,7 +36,10 @@ namespace FinanceTracker.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult test()
         {
-            return Ok();
+            var email = User.FindFirst(ClaimTypes.Email).Value;
+            var user = _userManager.FindByEmailAsync(email);
+            Console.WriteLine(ClaimTypes.Email.ToString());
+            return Ok(new {user.Result});
         }
 
         [HttpPost]
@@ -65,8 +68,9 @@ namespace FinanceTracker.Controllers
 
                 var Claims = new []
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email)
                 };
 
                 var token = new JwtSecurityToken
@@ -103,8 +107,9 @@ namespace FinanceTracker.Controllers
 
                     var claims = new[]
                     {
-                        new Claim(JwtRegisteredClaimNames.Sub, model.Email),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email)
                     };
 
                     var token = new JwtSecurityToken
