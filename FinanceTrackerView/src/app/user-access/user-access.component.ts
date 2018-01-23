@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-access.component.css']
 })
 export class UserAccessComponent implements OnInit {
-  private isLogin: boolean;
+  private isLogin = false;
   constructor(private userService: UserService) { }
   ngOnInit() {
     this.isLogin = this.userService.loggedIn;
@@ -21,7 +21,7 @@ export class UserAccessComponent implements OnInit {
       .subscribe(response => {
       localStorage.setItem('token', response['token']);
       this.userService.loggedIn = true;
-      // console.log(response);
+      this.isLogin = true;
     }, error => {
       alert('an unexpected error occured');
     });
@@ -32,5 +32,7 @@ export class UserAccessComponent implements OnInit {
   logout() {
     this.userService.loggedIn = false;
     this.userService.logout();
+    this.isLogin = false;
+    console.log('logout');
   }
 }
