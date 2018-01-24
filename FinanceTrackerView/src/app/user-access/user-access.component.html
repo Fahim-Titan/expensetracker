@@ -11,7 +11,11 @@
           <mat-form-field class="col-md-12">
             <input type="Password" matInput name="Password" ngModel required #Password="ngModel" placeholder="Enter your Password">
           </mat-form-field>
-          <button type="submit" mat-raised-button color="primary" class="col-md-offset-4">Login</button>
+          <mat-card-actions>
+            <div class="col-md-offset-6">
+                <button type="submit" mat-raised-button color="primary">Login</button>
+            </div>
+          </mat-card-actions>
         </form>
       </div>
       <div *ngIf="isLogin">

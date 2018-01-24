@@ -1,3 +1,4 @@
+import { RoutingModule } from './routing/routing.module';
 import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,10 +22,11 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [
-    UserService
+    UserService,
+    RoutingModule
   ],
   bootstrap: [AppComponent]
 })
