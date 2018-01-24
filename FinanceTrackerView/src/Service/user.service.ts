@@ -11,7 +11,7 @@ import 'rxjs/add/observable/throw';
 export class UserService {
   private root= 'http://localhost:5000/api';
   private url = '/token';
-  public loggedIn= false;
+  public loggedIn = false;
   constructor(private http: HttpClient) { }
   loginUser(f) {
     console.log('from service' + JSON.stringify(f));
@@ -33,9 +33,11 @@ export class UserService {
                   });
   }
 
-  getUserInfo(user) {
-    return this.http.post(this.root + this.url + '/user', user,  {
-      headers: new HttpHeaders().set('Content-Type', 'Application/Json')});
+  getUserInfo() {
+    return this.http.post(this.root + this.url + '/user', null,  {
+      headers: new HttpHeaders().set('Content-Type', 'Application/Json')
+        .set('Bearer', localStorage.getItem('token'))
+    });
   }
 
   updateUserInfo(user) {
@@ -46,5 +48,12 @@ export class UserService {
   deleteUserInfo(user) {
     this.http.post(this.root + this.url + '/delete', user,  {
       headers: new HttpHeaders().set('Content-Type', 'Application/Json')});
+  }
+
+  isUserLoggedIn() {
+    if (localStorage.getItem('token')) {
+      this.loggedIn = true;
+    }
+    return this.loggedIn;
   }
 }

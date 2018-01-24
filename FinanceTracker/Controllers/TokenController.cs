@@ -50,7 +50,7 @@ namespace FinanceTracker.Controllers
             {
                 var user = new ApplicationUser{ 
                     UserName= model.UserName, 
-                    Email = model.Email, 
+                    Email = model.Email,    
                     FirstName = model.FirstName, 
                     LastName = model.LastName,
                     PhoneNumber = model.PhoneNumber

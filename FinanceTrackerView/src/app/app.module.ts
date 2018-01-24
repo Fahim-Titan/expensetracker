@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 // Components
 import { AppComponent } from './app.component';
 import { UserAccessComponent } from './user-access/user-access.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 // Services
 import { UserService } from '../Service/user.service';
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    UserAccessComponent,
+    UserProfileComponent,
+    UserAccessComponent
   ],
   imports: [
     BrowserModule,
@@ -23,10 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
     MaterialModule,
+    RoutingModule
   ],
   providers: [
     UserService,
-    RoutingModule
   ],
   bootstrap: [AppComponent]
 })

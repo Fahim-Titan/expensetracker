@@ -1,7 +1,6 @@
-<div class="col-md-4 col-md-offset-4 box">
+<div class="col-md-4 col-md-offset-4 box" *ngIf="!isLogin">
   <mat-card>
     <div class="login-form">
-
       <mat-card-title>LOGIN</mat-card-title>
       <div *ngIf="!isLogin">
         <form #f="ngForm" (ngSubmit)="login(f)">
@@ -13,13 +12,10 @@
           </mat-form-field>
           <mat-card-actions>
             <div class="col-md-offset-6">
-                <button type="submit" mat-raised-button color="primary">Login</button>
+              <button type="submit" mat-raised-button color="primary">Login</button>
             </div>
           </mat-card-actions>
         </form>
-      </div>
-      <div *ngIf="isLogin">
-        <button (click)="logout()" mat-raised-button color="primary">Log Out</button>
       </div>
     </div>
   </mat-card>
@@ -55,4 +51,8 @@
     </div>
 
   </div>
+</div>
+
+<div *ngIf="isLogin">
+  <button (click)="logout()" mat-raised-button color="primary">Log Out</button>
 </div>

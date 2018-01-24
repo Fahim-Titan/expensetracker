@@ -1,9 +1,10 @@
 import { UserService } from './../../Service/user.service';
 import { NgForm } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatFormField } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/core';
 import { MatInput } from '@angular/material/input';
+import { Router } from '@angular/router';
 
 
 
@@ -13,9 +14,9 @@ import { MatInput } from '@angular/material/input';
   styleUrls: ['./user-access.component.css']
 })
 export class UserAccessComponent implements OnInit {
-  private isLogin = false;
+  @Input() private isLogin: boolean;
   private registerBtn = false;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private route: Router) { }
   ngOnInit() {
     this.isLogin = this.userService.loggedIn;
   }
@@ -27,6 +28,7 @@ export class UserAccessComponent implements OnInit {
       localStorage.setItem('token', response['token']);
       this.userService.loggedIn = true;
       this.isLogin = true;
+      this.gotoDashboard();
     }, error => {
       alert('an error occured');
     });
@@ -39,6 +41,7 @@ export class UserAccessComponent implements OnInit {
       localStorage.setItem('token', response['token']);
       this.userService.loggedIn = true;
       this.isLogin = true;
+      this.gotoDashboard();
     }, error => {
       alert('an unexpected error occured');
     });
@@ -51,9 +54,15 @@ export class UserAccessComponent implements OnInit {
     this.userService.logout();
     this.isLogin = false;
     console.log('logout');
+    console.log(this.userService.loggedIn);
   }
 
-  getUserInfo(f) {
-    this.userService.getUserInfo(f).subscribe();
+  getUserInfo() {
+    this.userService.getUserInfo().subscribe();
+  }
+
+  gotoDashboard() {
+    // this.getUserInfo();
+    this.route.navigate(['/user-profile']);
   }
 }

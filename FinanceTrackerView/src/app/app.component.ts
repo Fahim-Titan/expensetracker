@@ -1,3 +1,4 @@
+import { UserService } from './../Service/user.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  loggedIn: boolean;
+  constructor(private userService: UserService) {
+   this.loggedIn = this.userService.isUserLoggedIn();
+  }
 }

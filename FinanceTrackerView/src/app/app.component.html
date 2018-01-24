@@ -4,4 +4,5 @@
     Welcome to {{ title }}!
   </h1>
   </div>
-  <app-user-access></app-user-access>
+  <app-user-access [isLogin]="loggedIn"></app-user-access>
+  <router-outlet> </router-outlet>
