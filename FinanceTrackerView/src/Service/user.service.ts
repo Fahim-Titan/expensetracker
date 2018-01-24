@@ -25,7 +25,13 @@ export class UserService {
     localStorage.removeItem('token');
   }
 
-  register() {}
+  register(user) {
+    console.log('from service' + JSON.stringify(user));
+    return this.http.post(this.root + '/token/register',
+                    JSON.stringify(user), {
+                    headers: new HttpHeaders().set('Content-Type', 'Application/Json')
+                  });
+  }
 
   getUserInfo(user) {
     return this.http.post(this.root + this.url + '/user', user,  {

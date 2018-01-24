@@ -1,4 +1,6 @@
+import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // Components
@@ -9,16 +11,17 @@ import { UserAccessComponent } from './user-access/user-access.component';
 import { UserService } from '../Service/user.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    UserAccessComponent
+    UserAccessComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [
     UserService

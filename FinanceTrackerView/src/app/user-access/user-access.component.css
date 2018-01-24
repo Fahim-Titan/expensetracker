@@ -1,0 +1,19 @@
+.box {
+    background-color: azure;
+    border-radius: 5%;
+    padding: 3%
+}
+.login-form {
+    border-radius: 2%;
+    padding: 2%;
+}
+.register-form {
+    border-radius: 2%;
+    padding: 2%;
+}
+/* .button {
+    padding: 5em;
+    border-radius: 5em;
+    border-left: 50%;
+    padding-right: 10em;
+} */

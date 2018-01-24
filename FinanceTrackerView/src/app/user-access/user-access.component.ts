@@ -1,6 +1,10 @@
 import { UserService } from './../../Service/user.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { MatFormField } from '@angular/material/form-field';
+import { MatOption } from '@angular/material/core';
+import { MatInput } from '@angular/material/input';
+
 
 
 @Component({
@@ -10,9 +14,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserAccessComponent implements OnInit {
   private isLogin = false;
+  private registerBtn = false;
   constructor(private userService: UserService) { }
   ngOnInit() {
     this.isLogin = this.userService.loggedIn;
+  }
+
+  register(r) {
+    // calling service
+    this.userService.register(r.value)
+    .subscribe(response => {
+      localStorage.setItem('token', response['token']);
+      this.userService.loggedIn = true;
+      this.isLogin = true;
+    }, error => {
+      alert('an error occured');
+    });
   }
 
   login(f) {
