@@ -1,0 +1,64 @@
+<div class="col-md-4 col-md-offset-4 box" *ngIf="!isLogin">
+  <mat-card>
+    <div class="login-form">
+      <mat-card-title>LOGIN</mat-card-title>
+      <div *ngIf="!isLogin">
+        <form #f="ngForm" (ngSubmit)="login(f)">
+          <div class="col-md-12 col-xm-12 col-lg-12">
+            <mat-icon>account_circle</mat-icon>
+            <mat-form-field>
+              <input type="text" matInput name="Email" ngModel required #Email="ngModel" placeholder="Enter your Email">
+            </mat-form-field>
+          </div>
+          <div class="col-md-12 col-xm-12 col-lg-12">
+            <mat-icon>vpn_key</mat-icon>
+            <mat-form-field>
+              <input type="Password" matInput name="Password" ngModel required #Password="ngModel" placeholder="Enter your Password">
+            </mat-form-field>
+          </div>
+          <mat-card-actions>
+            <div class="col-md-offset-6 col-xm-offset-6 col-lg-offset-6">
+              <button type="submit" mat-raised-button color="primary">Login<mat-icon>keyboard_arrow_right</mat-icon></button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </div>
+  </mat-card>
+  <h3>or</h3>
+  <div class="register-form">
+    <button (click)="registerBtn = !registerBtn" mat-raised-button color="Accent">Register</button>
+    <div *ngIf="registerBtn">
+      <mat-card>
+        <mat-card-title>Register</mat-card-title>
+        <form #r="ngForm" (ngSubmit)="register(r)">
+          <mat-form-field class="col-md-12 col-xm-12 col-lg-12">
+            <input type="text" matInput name="UserName" ngModel required #UserName="ngModel" placeholder="Enter Your UserName">
+          </mat-form-field>
+          <mat-form-field class="col-md-12 col-xm-12 col-lg-12">
+            <input type="text" matInput name="Email" ngModel required #Email="ngModel" placeholder="Enter Your Email">
+          </mat-form-field>
+          <mat-form-field class="col-md-12 col-xm-12 col-lg-12">
+            <input type="password" matInput name="Password" ngModel required #Password="ngModel" placeholder="Enter Your Password">
+          </mat-form-field>
+          <mat-form-field class="col-md-6 col-xm-6 col-lg-6">
+            <input type="text" matInput name="FirstName" ngModel #FirstName="ngModel" placeholder="FirstName">
+          </mat-form-field>
+          <mat-form-field class="col-md-6 col-xm-6 col-lg-6">
+            <input type="text" matInput name="LastName" ngModel #LastName="ngModel" placeholder="LastName">
+          </mat-form-field>
+          <mat-form-field class="col-md-12 col-xm-12 col-lg-12">
+            <input type="text" matInput name="PhoneNumber" ngModel required #PhoneNumber="ngModel" placeholder="PhoneNumber">
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit">Register Me</button>
+          <button mat-raised-button color="ThemePalette" (click)="registerBtn = !registerBtn">Cancel</button>
+        </form>
+      </mat-card>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="isLogin">
+  <button (click)="logout()" mat-raised-button color="primary">Log Out</button>
+</div>

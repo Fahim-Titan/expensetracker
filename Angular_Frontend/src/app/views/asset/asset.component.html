@@ -1,0 +1,128 @@
+<div class="animated fadeIn">
+  <div class="col-sm-6">
+    <div class="card text-white bg-primary">
+      <form #a="ngForm" (ngSubmit)="addAsset(a)" ngForm>
+        <div class="card-header text-center">
+          <strong>Asset Information</strong>
+          <small>Form</small>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="AssetName" placeholder="Enter your account name" name="AssetName" #AssetName="ngModel"
+                  ngModel>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="name">Description</label>
+                <input type="text" class="form-control" id="AssetDescription" placeholder="Enter your account description" name="AssetDescription"
+                  #AssetDescription="ngModel" ngModel>
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="ccnumber">Amount</label>
+                <input type="text" class="form-control" id="Amount" placeholder="0000 0000 0000 0000" name="Amount" #Amount="ngModel" ngModel>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary">
+            <i class="fa fa-dot-circle-o"></i> Submit</button>
+          <button type="reset" class="btn btn-sm btn-danger">
+            <i class="fa fa-ban"></i> Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table> -->
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Assets
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Account Name</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Yiorgos Avraamu</td>
+              <td>2012/01/01</td>
+              <td>Member</td>
+              <td>
+                <span class="badge badge-success">Active</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Avram Tarasios</td>
+              <td>2012/02/01</td>
+              <td>Staff</td>
+              <td>
+                <span class="badge badge-danger">Banned</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Quintin Ed</td>
+              <td>2012/02/01</td>
+              <td>Admin</td>
+              <td>
+                <span class="badge badge-secondary">Inactive</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Enéas Kwadwo</td>
+              <td>2012/03/01</td>
+              <td>Member</td>
+              <td>
+                <span class="badge badge-warning">Pending</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Agapetus Tadeáš</td>
+              <td>2012/01/21</td>
+              <td>Staff</td>
+              <td>
+                <span class="badge badge-success">Active</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#">Prev</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

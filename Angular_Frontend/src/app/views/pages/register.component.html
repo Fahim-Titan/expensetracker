@@ -1,0 +1,80 @@
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mx-4">
+          <form ngForm #r="ngForm" (ngSubmit)="register(r)">
+            <div class="card-body p-4">
+              <h1>Register</h1>
+              <p class="text-muted">Create your account</p>
+              <div class="input-group mb-3">
+                <span class="input-group-addon">
+                  <i class="icon-user"></i>
+                </span>
+                <input type="text" class="form-control" placeholder="Username" name="UserName"
+                  #UserName="ngModel" ngModel required>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-addon">
+                  <i class="icon-arrow-right"></i>
+                </span>
+                <input type="text" class="form-control col-6" placeholder="First Name" name="FirstName"
+                  #FirstName="ngModel" ngModel required>
+                <span class="input-group-addon">
+                  <i class="icon-arrow-right"></i>
+                </span>
+                <input type="text" class="form-control col-6" placeholder="Last Name" name="LastName"
+                  #LastName="ngModel" ngModel required>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-addon">
+                  <i class="icon-phone"></i>
+                </span>
+                <input type="text" class="form-control" placeholder="Phone" name="PhoneNumber"
+                  #PhoneNumber="ngModel" ngModel required>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-addon">@</span>
+                <input type="text" class="form-control" placeholder="Email" name="Email"
+                 #Email="ngModel" ngModel required>
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-addon">
+                  <i class="icon-lock"></i>
+                </span>
+                <input type="password" class="form-control" placeholder="Password" name="Password"
+                  #Password="ngModel" ngModel required>
+              </div>
+              <div [hidden]="Password == RepeatPassword">
+                  <label class="form-form-control-label" for="repeatPassword">Input with error</label>
+              </div>
+              <div class="input-group mb-4">
+                <span class="input-group-addon">
+                  <i class="icon-lock"></i>
+                </span>
+                <input type="password" class="form-control" id="repeatPassword" placeholder="Repeat password" name="RepeatPassword"
+                  #RepeatPassword="ngModel" ngModel required>
+              </div>
+              <button type="Submit" class="btn btn-block btn-success" [disabled]="Password.value != RepeatPassword.value">Create Account</button>
+            </div>
+          </form>
+          <div class="card-footer p-4">
+            <div class="row">
+              <div class="col-6">
+                <button class="btn btn-block btn-facebook" type="button">
+                  <span>facebook</span>
+                </button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-block btn-twitter" type="button">
+                  <span>twitter</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
