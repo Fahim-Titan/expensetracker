@@ -1,3 +1,6 @@
+import { UserService } from './../../../services/user.service';
+import { TransactionService } from './../../../services/transaction.service';
+import { AssetService } from './../../../services/asset.service';
 import { AssetComponent } from './../asset/asset.component';
 import { TransactionComponent } from './../transaction/transaction.component';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +25,11 @@ import { CommonModule } from '@angular/common';
     WidgetsComponent,
     AssetComponent,
     TransactionComponent,
-   ]
+   ],
+  providers: [
+    AssetService,
+    TransactionService,
+    UserService
+  ]
 })
 export class WidgetsModule { }
