@@ -16,7 +16,12 @@ export class TransactionComponent implements OnInit {
 
   saveTransaction(t) {
     // var _transaction = new Transaction('', t.value['Name'], )
-    console.log(JSON.stringify(t.value) + this.FormName);
+    console.log(JSON.stringify(t.value));
+    t.value['Type'] = this.FormName;
+    console.log(t.value['Name']);
+    console.log(t.value['Type']);
+    console.log(t.value);
+    
   }
 
   ShowExpenseForm() {
