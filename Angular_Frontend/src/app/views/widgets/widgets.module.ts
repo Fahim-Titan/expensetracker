@@ -1,7 +1,7 @@
 import { RegisterComponent } from './../pages/register.component';
 // import { LoginComponent } from './../pages/login.component';
-import { P500Component } from './../pages/500.component';
-import { P404Component } from './../pages/404.component';
+// import { P500Component } from './../pages/500.component';
+// import { P404Component } from './../pages/404.component';
 import { UserService } from './../../../services/user.service';
 import { TransactionService } from './../../../services/transaction.service';
 import { AssetService } from './../../../services/asset.service';
@@ -30,10 +30,10 @@ import { HttpClientModule } from '@angular/common/http';
     WidgetsComponent,
     AssetComponent,
     TransactionComponent,
-    P404Component,
-    P500Component,
+    // P404Component,
+    // P500Component,
     // LoginComponent,
-    RegisterComponent
+    // RegisterComponent
    ],
   providers: [
     AssetService,

@@ -8,20 +8,24 @@
               <form #l="ngForm" (ngSubmit)="login(l)" ngForm>
                 <h1>Login</h1>
                 <p class="text-muted">Sign In to your account</p>
-                <p class="text-danger" *ngIf="loginError">{{loginText}}</p>
+                <p class="text-danger" *ngIf="loginError">{{loginErrorText}}</p>
+                <div class="text-danger" *ngIf="!Email.valid && Email.touched">
+                  <p class="text-danger" *ngIf="Email?.errors.pattern">Enter Your Email in Correct Format</p>
+                </div>
                 <div class="input-group mb-3">
                   <span class="input-group-addon">
                     <i class="icon-user"></i>
                   </span>
                   <input type="text" class="form-control" placeholder="Email" name="Email"
-                    #Email="ngModel" ngModel>
+                    #Email="ngModel" ngModel required
+                    pattern="([a-zA-Z0-9\.-_]+@[a-zA-Z0-9-\.]+\.[a-zA-Z0-9-]+)">                    
                 </div>
                 <div class="input-group mb-4">
                   <span class="input-group-addon">
                     <i class="icon-lock"></i>
                   </span>
                   <input type="password" class="form-control" placeholder="Password" name="Password"
-                    #Password="ngModel" ngModel>
+                    #Password="ngModel" ngModel required>
                 </div>
                 <div class="row">
                   <div class="col-6">

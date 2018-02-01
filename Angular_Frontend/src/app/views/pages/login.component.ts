@@ -7,11 +7,20 @@ import { UserService } from 'services/user.service';
 })
 export class LoginComponent {
   private loginError = false;
-  private loginText = '';
+  private loginErrorText = '';
   // constructor() { }
   constructor(private _userService: UserService, private router: Router) { }
 
   login(l) {
+    // if (true) {
+    //   this.processLogin(l);
+    // }
+    console.log(l);
+    console.log(l.valid);
+    // l.resetForm();
+  }
+
+  processLogin(l) {
     console.log(l.value);
     this._userService.loginUser(l.value).
     subscribe(response => {
@@ -21,14 +30,15 @@ export class LoginComponent {
     (error: Response) => {
       this.loginError = true;
       if (error.status === 400) {
-        this.loginText = 'Email Format or Password is not correct';
+        this.loginErrorText = 'Email Format or Password is not correct';
       }
       if (error.status === 401) {
-        this.loginText = 'Password is not correct';
+        this.loginErrorText = 'Password is not correct';
       }
       if (error.status === 404) {
-        this.loginText = 'User does not exist';
+        this.loginErrorText = 'User does not exist';
       }
     });
+
   }
 }
