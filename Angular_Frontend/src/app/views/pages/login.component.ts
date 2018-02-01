@@ -13,12 +13,22 @@ export class LoginComponent {
 
   login(l) {
     console.log(l.value);
-    this._userService.loginUser(l.value).subscribe(response => {
+    this._userService.loginUser(l.value).
+    subscribe(response => {
       localStorage.setItem('token', response['token']);
       this.router.navigate(['dashboard']);
-    }, error => {
+    },
+    (error: Response) => {
       this.loginError = true;
-      this.loginText = 'An Error has occured';
+      if (error.status === 400) {
+        this.loginText = 'Email Format or Password is not correct';
+      }
+      if (error.status === 401) {
+        this.loginText = 'Password is not correct';
+      }
+      if (error.status === 404) {
+        this.loginText = 'User does not exist';
+      }
     });
   }
 }
