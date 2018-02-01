@@ -1,3 +1,4 @@
+import { LoginComponent } from './views/pages/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -13,6 +14,10 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '',
@@ -47,19 +52,6 @@ export const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'pages',
-    component: SimpleLayout,
-    data: {
-      title: 'Pages'
-    },
-    children: [
-      {
-        path: '',
-        loadChildren: './views/pages/pages.module#PagesModule',
-      }
-    ]
-  }
 ];
 
 @NgModule({

@@ -1,3 +1,4 @@
+import { LoginComponent } from './views/pages/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -59,6 +60,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -67,13 +69,14 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-
+    FormsModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES,
+    LoginComponent
   ],
   providers: [{
     provide: LocationStrategy,

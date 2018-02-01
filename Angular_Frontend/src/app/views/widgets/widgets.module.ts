@@ -1,3 +1,7 @@
+import { RegisterComponent } from './../pages/register.component';
+// import { LoginComponent } from './../pages/login.component';
+import { P500Component } from './../pages/500.component';
+import { P404Component } from './../pages/404.component';
 import { UserService } from './../../../services/user.service';
 import { TransactionService } from './../../../services/transaction.service';
 import { AssetService } from './../../../services/asset.service';
@@ -11,6 +15,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { WidgetsComponent } from './widgets.component';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -25,11 +30,16 @@ import { CommonModule } from '@angular/common';
     WidgetsComponent,
     AssetComponent,
     TransactionComponent,
+    P404Component,
+    P500Component,
+    // LoginComponent,
+    RegisterComponent
    ],
   providers: [
     AssetService,
     TransactionService,
-    UserService
+    UserService,
+    HttpClientModule
   ]
 })
 export class WidgetsModule { }

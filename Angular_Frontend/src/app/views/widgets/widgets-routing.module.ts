@@ -1,3 +1,4 @@
+// import { LoginComponent } from './../pages/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -27,6 +28,10 @@ const routes: Routes = [
       title: 'Transaction'
     }
   },
+  // {
+  //   path: 'login',
+  //   component: LoginComponent
+  // }
 ];
 
 @NgModule({

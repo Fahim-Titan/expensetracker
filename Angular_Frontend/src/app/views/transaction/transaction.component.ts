@@ -21,7 +21,6 @@ export class TransactionComponent implements OnInit {
     console.log(t.value['Name']);
     console.log(t.value['Type']);
     console.log(t.value);
-    
   }
 
   ShowExpenseForm() {
