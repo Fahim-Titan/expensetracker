@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { UserService } from 'services/user.service';
 // import { Forms } from '@angular/forms';
@@ -7,16 +8,17 @@ import { UserService } from 'services/user.service';
 export class LoginComponent {
   private loginError = false;
   private loginText = '';
-  constructor() { }
-  // constructor(private _userService: UserService) { }
+  // constructor() { }
+  constructor(private _userService: UserService, private router: Router) { }
 
   login(l) {
     console.log(l.value);
-    // this._userService.loginUser(l.value).subscribe(response => {
-    //   localStorage.setItem('token', response['token']);
-    // }, error => {
-    //   this.loginError = true;
-    //   this.loginText = 'An Error has occured';
-    // });
+    this._userService.loginUser(l.value).subscribe(response => {
+      localStorage.setItem('token', response['token']);
+      this.router.navigate(['dashboard']);
+    }, error => {
+      this.loginError = true;
+      this.loginText = 'An Error has occured';
+    });
   }
 }

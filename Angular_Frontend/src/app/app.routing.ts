@@ -1,3 +1,4 @@
+import { P500Component } from './views/pages/500.component';
 import { LoginComponent } from './views/pages/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -8,16 +9,30 @@ import {
   SimpleLayout
 } from './containers';
 import { AssetComponent } from 'app/views/asset/asset.component';
+import { RegisterComponent } from 'app/views/pages/register.component';
+import { P404Component } from 'app/views/pages/404.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: '404',
+    component: P404Component
+  },
+  {
+    path: '500',
+    component: P500Component
   },
   {
     path: '',

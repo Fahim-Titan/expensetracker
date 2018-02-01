@@ -1,3 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './../services/user.service';
+import { P500Component } from './views/pages/500.component';
+import { RegisterComponent } from './views/pages/register.component';
 import { LoginComponent } from './views/pages/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -61,6 +65,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { FormsModule } from '@angular/forms';
+import { P404Component } from 'app/views/pages/404.component';
 
 @NgModule({
   imports: [
@@ -69,19 +74,25 @@ import { FormsModule } from '@angular/forms';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    P404Component,
+    P500Component
   ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  },
+    UserService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
