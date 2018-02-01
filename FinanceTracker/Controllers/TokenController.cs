@@ -125,6 +125,9 @@ namespace FinanceTracker.Controllers
 
                     return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
                 }
+                else{
+                    return NotFound();
+                }
             }
 
             return BadRequest();
