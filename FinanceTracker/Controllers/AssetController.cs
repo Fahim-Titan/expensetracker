@@ -8,24 +8,38 @@ using Microsoft.EntityFrameworkCore;
 using FinanceTracker.Data;
 using FinanceTracker.Models;
 using Microsoft.AspNetCore.Cors;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 
-namespace FinanceTracker.Controllers_
+namespace FinanceTracker.Controllers
 {
     [EnableCors("CORSPolicy")]
     public class AssetController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AssetController(ApplicationDbContext context)
+        public AssetController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this._userManager = userManager;
         }
-
-        // GET: Asset
+        
+        // POST: 'api/asset/list'
+        // gets the user's asset list
+        [HttpPost]
+        [Route("api/asset/list")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Assets.Include(a => a.user);
-            return View(await applicationDbContext.ToListAsync());
+            var email = User.FindFirst(ClaimTypes.Email).Value;
+            var user = _userManager.FindByEmailAsync(email);
+
+            var assetList = _context.Assets.Where(a => a.UserId == user.Result.Id).ToListAsync();
+            return Ok(assetList);
         }
 
         // GET: Asset/Details/5
@@ -158,5 +172,6 @@ namespace FinanceTracker.Controllers_
         {
             return _context.Assets.Any(e => e.Id == id);
         }
+
     }
 }
