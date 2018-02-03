@@ -59,7 +59,7 @@ namespace FinanceTracker.Controllers_
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AssetName,AssetDescription,Amount,UserId")] Asset asset)
+        public async Task<IActionResult> Create([Bind("AssetName,AssetDescription,Amount,UserId")] Asset asset)
         {
             if (ModelState.IsValid)
             {
