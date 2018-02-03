@@ -13,6 +13,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 namespace FinanceTracker.Controllers
 {
@@ -27,13 +28,13 @@ namespace FinanceTracker.Controllers
             _context = context;
             this._userManager = userManager;
         }
-        
+
         // POST: 'api/asset/list'
         // gets the user's asset list
         [HttpPost]
         [Route("api/asset/list")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> list()
         {
             var email = User.FindFirst(ClaimTypes.Email).Value;
             var user = _userManager.FindByEmailAsync(email);
@@ -42,23 +43,25 @@ namespace FinanceTracker.Controllers
             return Ok(assetList);
         }
 
-        // GET: Asset/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // POST: "api/asset/details"
+        // gets user's specific asset realted transaction history
+        // parameters: takes asset id as param.
+        // return: returns transaction history related to that asset
+        [HttpPost]
+        [Route("api/asset/details")]
+        public async Task<IActionResult> Details([FromBody] string id)
         {
             if (id == null)
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            var asset = await _context.Assets
-                .Include(a => a.user)
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (asset == null)
+            var assetDetailsList = _context.Transactions.Where(t => t.AssetId == Convert.ToInt32(id)).ToListAsync();
+            if (assetDetailsList == null)
             {
                 return NotFound();
             }
 
-            return View(asset);
+            return Ok(JsonConvert.SerializeObject(assetDetailsList));
         }
 
         // GET: Asset/Create
@@ -79,7 +82,7 @@ namespace FinanceTracker.Controllers
             {
                 _context.Add(asset);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Ok();
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", asset.UserId);
             return View(asset);
@@ -132,7 +135,7 @@ namespace FinanceTracker.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                // return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", asset.UserId);
             return View(asset);
@@ -165,7 +168,7 @@ namespace FinanceTracker.Controllers
             var asset = await _context.Assets.SingleOrDefaultAsync(m => m.Id == id);
             _context.Assets.Remove(asset);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Ok();
         }
 
         private bool AssetExists(int id)
