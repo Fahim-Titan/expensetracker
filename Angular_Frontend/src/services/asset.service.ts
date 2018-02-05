@@ -14,15 +14,13 @@ export class AssetService {
       headers: new HttpHeaders().set('Content-Type', 'Application/Json')
         .set('authorization', this.getToken())
     });
-
-    // return this.http.post(this.root + this.url + '/create', JSON.stringify(f), )
   }
 
-  GetAssetDetails(f) {
-    this.http.post(this.root + this.url + '/details', f, {
-      headers: new HttpHeaders().set('Content-Type', 'Application/Json')
-    });
-  }
+  // GetAssetDetails(f) {
+  //   this.http.post(this.root + this.url + '/details', f, {
+  //     headers: new HttpHeaders().set('Content-Type', 'Application/Json')
+  //   });
+  // }
 
   GetAssetList() {
     return this.http.post(this.root + this.url + '/list', null, {
@@ -32,14 +30,16 @@ export class AssetService {
   }
 
   UpdateAsset(f) {
-    this.http.post(this.root + this.url + '/edit', f, {
+    this.http.post(this.root + this.url + '/edit', JSON.stringify(f), {
       headers: new HttpHeaders().set('Content-Type', 'Application/Json')
+        .set('authorization', this.getToken())
     });
   }
 
   DeleteAsset(f) {
-    this.http.post(this.root + this.url + '/delete', f, {
+    return this.http.post(this.root + this.url + '/delete', f, {
       headers: new HttpHeaders().set('Content-Type', 'Application/Json')
+        .set('authorization', this.getToken())
     });
   }
 

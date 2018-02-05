@@ -65,10 +65,11 @@
               <td>{{asset.AssetName}}</td>
               <td>{{asset.AssetDescription}}</td>
               <td>{{asset.Amount}}</td>
+              <td><button (click)="delete(asset.Id)">Delete</button></td>
             </tr>
           </tbody>
         </table>
-        <ul class="pagination">
+        <!-- <ul class="pagination">
           <li class="page-item">
             <a class="page-link" href="#">Prev</a>
           </li>
@@ -87,7 +88,7 @@
           <li class="page-item">
             <a class="page-link" href="#">Next</a>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
   </div>
