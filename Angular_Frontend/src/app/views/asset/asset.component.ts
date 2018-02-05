@@ -1,3 +1,4 @@
+import { AssetService } from './../../../services/asset.service';
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource, Ng2SmartTableModule } from 'ng2-smart-table';
 
@@ -7,63 +8,25 @@ import { LocalDataSource, Ng2SmartTableModule } from 'ng2-smart-table';
   styleUrls: ['./asset.component.css']
 })
 export class AssetComponent implements OnInit {
-  // source: LocalDataSource;
-  // data= [
-  //   {
-  //     id: 1,
-  //     name: 'Leanne Graham',
-  //     username: 'Bret',
-  //     email: 'Sincere@april.biz'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Ervin Howell',
-  //     username: 'Antonette',
-  //     email: 'Shanna@melissa.tv'
-  //   },
-  //   {
-  //     id: 11,
-  //     name: 'Nicholas DuBuque',
-  //     username: 'Nicholas.Stanton',
-  //     email: 'Rey.Padberg@rosamond.biz'
-  //   }
-  // ];
-
-  // settings = {
-  //   columns: {
-  //     id: {
-  //       title: 'ID'
-  //     },
-  //     name: {
-  //       title: 'Full Name'
-  //     },
-  //     username: {
-  //       title: 'Star Name'
-  //     },
-  //     email: {
-  //       title: 'Email'
-  //     }
-  //   }
-  // };
-  constructor() {
+  private assetList: any;
+  constructor(private _assetService: AssetService) {
     // this.source = new LocalDataSource(this.data)
    }
 
   ngOnInit() {
+    this.showAssetInformation();
   }
 
   addAsset(a) {
     console.log(a.value);
-    // this.data.push( {
-    //   id : 2,
-    //   name: a.asset,
-    //   username : 'sadf',
-    //   email : 'sadf'
-    // });
+    this._assetService.CreateAsset(a.value).subscribe();
   }
 
   showAssetInformation() {
-
+    this._assetService.GetAssetList().subscribe(
+      response =>
+       this.assetList = response
+    );
   }
 
 }

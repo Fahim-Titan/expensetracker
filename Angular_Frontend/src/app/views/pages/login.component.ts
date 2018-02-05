@@ -12,11 +12,11 @@ export class LoginComponent {
   constructor(private _userService: UserService, private router: Router) { }
 
   login(l) {
-    // if (true) {
-    //   this.processLogin(l);
-    // }
-    console.log(l);
-    console.log(l.valid);
+    if (l.valid) {
+      this.processLogin(l);
+    }
+    // console.log(l);
+    // console.log(l.valid);
     // l.resetForm();
   }
 

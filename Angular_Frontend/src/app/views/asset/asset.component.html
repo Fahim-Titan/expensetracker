@@ -53,52 +53,18 @@
         <table class="table table-striped">
           <thead>
             <tr>
+              <th>Id</th>
               <th>Account Name</th>
               <th>Description</th>
               <th>Amount</th>
-              <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Yiorgos Avraamu</td>
-              <td>2012/01/01</td>
-              <td>Member</td>
-              <td>
-                <span class="badge badge-success">Active</span>
-              </td>
-            </tr>
-            <tr>
-              <td>Avram Tarasios</td>
-              <td>2012/02/01</td>
-              <td>Staff</td>
-              <td>
-                <span class="badge badge-danger">Banned</span>
-              </td>
-            </tr>
-            <tr>
-              <td>Quintin Ed</td>
-              <td>2012/02/01</td>
-              <td>Admin</td>
-              <td>
-                <span class="badge badge-secondary">Inactive</span>
-              </td>
-            </tr>
-            <tr>
-              <td>Enéas Kwadwo</td>
-              <td>2012/03/01</td>
-              <td>Member</td>
-              <td>
-                <span class="badge badge-warning">Pending</span>
-              </td>
-            </tr>
-            <tr>
-              <td>Agapetus Tadeáš</td>
-              <td>2012/01/21</td>
-              <td>Staff</td>
-              <td>
-                <span class="badge badge-success">Active</span>
-              </td>
+          <tbody >
+            <tr *ngFor="let asset of assetList">
+              <td>{{asset.Id}}</td>
+              <td>{{asset.AssetName}}</td>
+              <td>{{asset.AssetDescription}}</td>
+              <td>{{asset.Amount}}</td>
             </tr>
           </tbody>
         </table>
