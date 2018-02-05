@@ -13110,12 +13110,14 @@
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\masum\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\masum\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -13132,34 +13134,34 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
-            "target": "Package",
-            "version": "2.0",
-            "autoReferenced": true
-          },
           "Microsoft.AspNetCore.All": {
             "target": "Package",
-            "version": "2.0.3"
+            "version": "[2.0.3, )"
           },
           "Microsoft.Composition": {
             "target": "Package",
-            "version": "1.0.31"
+            "version": "[1.0.31, )"
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "target": "Package",
-            "version": "2.0.1"
+            "version": "[2.0.1, )"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "[2.0.0, )",
+            "autoReferenced": true
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
-            "version": "2.0.2"
+            "version": "[2.0.2, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",
-            "version": "10.0.3"
+            "version": "[10.0.3, )"
           },
           "System.Composition": {
             "target": "Package",
-            "version": "1.1.0"
+            "version": "[1.1.0, )"
           }
         },
         "imports": [

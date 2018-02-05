@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 
+
 namespace FinanceTracker.Controllers
 {
     [EnableCors("CORSPolicy")]
@@ -40,7 +41,7 @@ namespace FinanceTracker.Controllers
             var user = _userManager.FindByEmailAsync(email);
 
             var assetList = _context.Assets.Where(a => a.UserId == user.Result.Id).ToListAsync();
-            return Ok(assetList);
+            return Ok(JsonConvert.SerializeObject(assetList));
         }
 
         // POST: "api/asset/details"
@@ -49,6 +50,7 @@ namespace FinanceTracker.Controllers
         // return: returns transaction history related to that asset
         [HttpPost]
         [Route("api/asset/details")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Details([FromBody] string id)
         {
             if (id == null)
@@ -64,63 +66,42 @@ namespace FinanceTracker.Controllers
             return Ok(JsonConvert.SerializeObject(assetDetailsList));
         }
 
-        // GET: Asset/Create
-        public IActionResult Create()
-        {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
-        }
-
         // POST: Asset/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AssetName,AssetDescription,Amount,UserId")] Asset asset)
+        [Route("api/asset/create")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Create([Bind("AssetName,AssetDescription,Amount")][FromBody] Asset asset)
         {
             if (ModelState.IsValid)
             {
+                var email = User.FindFirst(ClaimTypes.Email).Value;
+                var user = _userManager.FindByEmailAsync(email);
+                asset.UserId = user.Result.Id;
+
                 _context.Add(asset);
                 await _context.SaveChangesAsync();
                 return Ok();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", asset.UserId);
-            return View(asset);
-        }
-
-        // GET: Asset/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var asset = await _context.Assets.SingleOrDefaultAsync(m => m.Id == id);
-            if (asset == null)
-            {
-                return NotFound();
-            }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", asset.UserId);
-            return View(asset);
+            return BadRequest();
         }
 
         // POST: Asset/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AssetName,AssetDescription,Amount,UserId")] Asset asset)
+        [Route("api/asset/edit")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Edit([Bind("Id,AssetName,AssetDescription,Amount")][FromBody] Asset asset)
         {
-            if (id != asset.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var email = User.FindFirst(ClaimTypes.Email).Value;
+                    var user = _userManager.FindByEmailAsync(email);
+                    asset.UserId = user.Result.Id;
                     _context.Update(asset);
                     await _context.SaveChangesAsync();
                 }
@@ -137,33 +118,16 @@ namespace FinanceTracker.Controllers
                 }
                 // return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", asset.UserId);
-            return View(asset);
+            return Ok();
         }
 
         // GET: Asset/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var asset = await _context.Assets
-                .Include(a => a.user)
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (asset == null)
-            {
-                return NotFound();
-            }
-
-            return View(asset);
-        }
 
         // POST: Asset/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        [Route("api/asset/delete")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Delete([FromBody]int id)
         {
             var asset = await _context.Assets.SingleOrDefaultAsync(m => m.Id == id);
             _context.Assets.Remove(asset);
