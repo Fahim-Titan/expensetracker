@@ -40,7 +40,15 @@ namespace FinanceTracker.Controllers
             var email = User.FindFirst(ClaimTypes.Email).Value;
             var user = _userManager.FindByEmailAsync(email);
 
-            var assetList = _context.Assets.Where(a => a.UserId == user.Result.Id).ToListAsync();
+            var assetList = await _context.Assets.Where(a => a.UserId == user.Result.Id).Select(item =>
+                    new Asset
+                    {
+                        Id = item.Id,
+                        AssetName = item.AssetName,
+                        AssetDescription = item.AssetDescription,
+                        Amount = item.Amount
+                    }
+                        ).ToListAsync();
             return Ok(JsonConvert.SerializeObject(assetList));
         }
 
@@ -57,7 +65,7 @@ namespace FinanceTracker.Controllers
             {
                 return BadRequest();
             }
-            var assetDetailsList = _context.Transactions.Where(t => t.AssetId == Convert.ToInt32(id)).ToListAsync();
+            var assetDetailsList = await _context.Transactions.Where(t => t.AssetId == Convert.ToInt32(id)).ToListAsync();
             if (assetDetailsList == null)
             {
                 return NotFound();
