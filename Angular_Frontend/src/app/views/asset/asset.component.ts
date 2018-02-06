@@ -25,14 +25,17 @@ export class AssetComponent implements OnInit {
 
   showAssetInformation() {
     this._assetService.GetAssetList().subscribe(
-      response =>
+      response => {
+        this.assetList = '' ,
         this.assetList = response
+      }
     );
   }
 
   delete(id) {
     console.log(id);
     this._assetService.DeleteAsset(id).subscribe();
+    this.showAssetInformation();
   }
 
 }
