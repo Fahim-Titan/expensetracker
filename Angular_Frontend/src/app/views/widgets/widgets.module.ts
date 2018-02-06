@@ -16,6 +16,7 @@ import { WidgetsComponent } from './widgets.component';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     BsDropdownModule,
     FormsModule,
     Ng2SmartTableModule,
-    CommonModule
+    CommonModule,
+    AlertModule.forRoot()
   ],
   declarations: [
     WidgetsComponent,
