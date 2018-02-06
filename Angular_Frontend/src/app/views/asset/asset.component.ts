@@ -25,6 +25,7 @@ export class AssetComponent implements OnInit {
       res => {
         this.showAssetInformation();
         this.showNotification('success', 'New Asset added to the table', 5000);
+        a.form.reset();
       }
     );
   }
