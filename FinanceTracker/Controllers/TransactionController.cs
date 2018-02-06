@@ -80,10 +80,15 @@ namespace FinanceTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Route("api/transaction/create")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Create([FromBody] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
+                var email = User.FindFirst(ClaimTypes.Email).Value;
+                var user = _userManager.FindByEmailAsync(email);
+
+                transaction.UserId = user.Result.Id;
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
                 return Ok();
