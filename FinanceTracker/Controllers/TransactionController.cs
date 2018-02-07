@@ -33,12 +33,13 @@ namespace FinanceTracker.Controllers
         [HttpPost]
         [Route("api/transaction/list")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> Index([FromBody] ApplicationUser appUser)
+        public async Task<IActionResult> Index()
         {
-            var user = await _userManager.FindByEmailAsync(appUser.Email);
+            var email = User.FindFirst(ClaimTypes.Email).Value;
+            var user = await _userManager.FindByEmailAsync(email);
             if (user !=null)
             {
-                var userTransactionList = await _context.Transactions.Where(t => t.UserId ==  user.Id).ToListAsync();
+                var userTransactionList = await _context.Transactions.Where(t => t.UserId == user.Id).ToListAsync();
                 if (userTransactionList == null)
                 {
                     return NoContent();
@@ -50,32 +51,6 @@ namespace FinanceTracker.Controllers
             // var applicationDbContext = _context.Transactions.Include(t => t.user);
             // return View(await applicationDbContext.ToListAsync());
         }
-
-        // // GET: Transaction/Details/5
-        // public async Task<IActionResult> Details(int? id)
-        // {
-        //     if (id == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     var transaction = await _context.Transactions
-        //         .Include(t => t.user)
-        //         .SingleOrDefaultAsync(m => m.Id == id);
-        //     if (transaction == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     return View(transaction);
-        // }
-
-        // GET: Transaction/Create
-        // public IActionResult Create()
-        // {
-        //     ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-        //     return View();
-        // }
 
         // POST: Transaction/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
