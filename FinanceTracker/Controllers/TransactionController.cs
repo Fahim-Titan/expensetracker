@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using FinanceTracker.Data;
 using FinanceTracker.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Cors;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 namespace FinanceTracker.Controllers
 {
