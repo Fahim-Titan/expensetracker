@@ -16,7 +16,9 @@
           <div class="card-body">
             <div class="form-group">
               <label for="Type">Transaction Type</label>
-              <label><strong>{{FormName}}</strong></label>
+              <label>
+                <strong>{{FormName}}</strong>
+              </label>
               <!-- <span class="help-block">Description</span> -->
             </div>
 
@@ -29,6 +31,12 @@
               <label for="nf-password">Description</label>
               <input type="text" id="Description" name="Description" ngModel #Description="ngModel" class="form-control" placeholder="Enter Description (Optional)">
               <!-- <span class="help-block">Description</span> -->
+            </div>
+            <div class="form-group">
+              <label for="AssetId">From Account</label>
+              <select [(ngModel)]="AssetId" id="AssetId" name="AssetId">
+                <option *ngFor="let item of assetDropDown" ngValue="{{item.Id}}">{{item.AssetName}}</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="date-field">Date of {{FormName}}</label>

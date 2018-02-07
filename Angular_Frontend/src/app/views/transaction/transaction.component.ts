@@ -1,3 +1,5 @@
+import { AssetService } from './../../../services/asset.service';
+import { TransactionService } from './../../../services/transaction.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,9 +11,15 @@ export class TransactionComponent implements OnInit {
 
   private _showForm = false;
   private FormName= '';
-  constructor() { }
+  private assetDropDown: any;
+  constructor(private _transactionService: TransactionService, private _assetService: AssetService) { }
 
   ngOnInit() {
+    this._assetService.GetAssetList().subscribe(
+      res => {
+        this.assetDropDown = res;
+      }
+    )
   }
 
   saveTransaction(t) {
@@ -21,6 +29,8 @@ export class TransactionComponent implements OnInit {
     console.log(t.value['Name']);
     console.log(t.value['Type']);
     console.log(t.value);
+
+    this._transactionService.CreateTransaction(t.value).subscribe();
   }
 
   ShowExpenseForm() {
