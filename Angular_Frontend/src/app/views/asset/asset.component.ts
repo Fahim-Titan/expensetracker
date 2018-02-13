@@ -22,7 +22,11 @@ export class AssetComponent implements OnInit {
   addAsset(a) {
     console.log(a.value);
     this._assetService.CreateAsset(a.value).subscribe(
-      res => {
+      res => {},
+      (error: Response) => {
+        console.log(error);
+      },
+      () => {
         this.showAssetInformation();
         this.showNotification('success', 'New Asset added to the table', 5000);
         a.form.reset();
@@ -33,7 +37,11 @@ export class AssetComponent implements OnInit {
   delete(id) {
     console.log(id);
     this._assetService.DeleteAsset(id).subscribe(
-      res => {
+      res => { },
+      (error: Response) => {
+        console.log(error);
+      },
+      () => {
         this.showAssetInformation();
         this.showNotification('info', 'selected data is deleted', 5000);
       }
