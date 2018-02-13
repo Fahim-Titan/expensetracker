@@ -90,7 +90,7 @@ namespace FinanceTracker.Controllers
 
                 _context.Add(asset);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok(null);
             }
             return BadRequest();
         }
@@ -140,7 +140,7 @@ namespace FinanceTracker.Controllers
             var asset = await _context.Assets.SingleOrDefaultAsync(m => m.Id == id);
             _context.Assets.Remove(asset);
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(null);
         }
 
         private bool AssetExists(int id)
