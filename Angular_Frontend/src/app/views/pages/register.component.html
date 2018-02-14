@@ -7,6 +7,9 @@
             <div class="card-body p-4">
               <h1>Register</h1>
               <p class="text-muted">Create your account</p>
+              <div *ngIf="loginError">
+                <p>{{loginErrorText}}</p>
+              </div>
               <div class="input-group mb-3">
                 <span class="input-group-addon">
                   <i class="icon-user"></i>
@@ -35,19 +38,31 @@
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-addon">@</span>
-                <input type="text" class="form-control" placeholder="Email" name="Email"
-                 #Email="ngModel" ngModel required>
+                <input type="email" class="form-control" placeholder="Email" name="Email"
+                 #Email="ngModel" ngModel required
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
               </div>
-
+              <div *ngIf="!Email.valid && Email.touched">
+                <span *ngIf="Email?.errors?.pattern" class="htlp-block text-danger">Please Enter a Valid Email</span>
+              </div>
               <div class="input-group mb-3">
                 <span class="input-group-addon">
                   <i class="icon-lock"></i>
                 </span>
+                <!-- pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]" -->
+                <!-- (?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$ -->
                 <input type="password" class="form-control" placeholder="Password" name="Password"
-                  #Password="ngModel" ngModel required>
+                  #Password="ngModel" ngModel required
+                  pattern="((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                  minlength="6"
+                  maxlength="20">
               </div>
-              <div [hidden]="Password == RepeatPassword">
-                  <label class="form-form-control-label" for="repeatPassword">Input with error</label>
+              <div *ngIf="!Password.valid && Password.touched">
+                <span *ngIf="Password?.errors?.minlength" class="help-block text-danger">Password should contain atleast 6 charecters</span>
+                <span *ngIf="Password?.errors?.pattern" class="help-block text-danger">Password should contain atleast 1 Upper Case letter, 1 Lower Case letter 1 special charecter, 1 numeric charecter</span>
+              </div>
+              <div *ngIf="Password.value != RepeatPassword.value">
+                  <label class="form-form-control-label" for="repeatPassword"><span class="text-danger">Password Mismatch</span></label>
               </div>
               <div class="input-group mb-4">
                 <span class="input-group-addon">
@@ -56,7 +71,7 @@
                 <input type="password" class="form-control" id="repeatPassword" placeholder="Repeat password" name="RepeatPassword"
                   #RepeatPassword="ngModel" ngModel required>
               </div>
-              <button type="Submit" class="btn btn-block btn-success" [disabled]="Password.value != RepeatPassword.value">Create Account</button>
+              <button type="Submit" class="btn btn-block btn-success" [disabled]="((Password.value != RepeatPassword.value) || (Password.value == ''))">Create Account</button>
             </div>
           </form>
           <div class="card-footer p-4">
