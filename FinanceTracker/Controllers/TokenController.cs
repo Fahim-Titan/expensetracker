@@ -59,30 +59,36 @@ namespace FinanceTracker.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    // await _signInManager.SignInAsync(user, isPersistent: false);
+                    var response = await _signInManager.CheckPasswordSignInAsync(user, model.Password, lockoutOnFailure: false);
+                    if (!response.Succeeded)
+                    {
+                        return Unauthorized();
+                    }
+                    var claims = new[]
+                    {
+                        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email)
+                    };
+
+                    var token = new JwtSecurityToken
+                    (
+                        issuer: _configuration["Token:Issuer"],
+                        audience: _configuration["Token:Audience"],
+                        claims: claims,
+                        expires: DateTime.UtcNow.AddMinutes(5),
+                        notBefore: DateTime.UtcNow,
+                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Token:Key"])),
+                                SecurityAlgorithms.HmacSha256)
+                    );
+
+                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
                 }
                 else
                 {
                     return Unauthorized();
                 }
-
-                var Claims = new []
-                {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email)
-                };
-
-                var token = new JwtSecurityToken
-                (
-                    issuer: _configuration["Token:Issuer"],
-                    audience: _configuration["Token: Audience"],
-                    claims: Claims,
-                    expires: DateTime.Now.AddMinutes(2),
-                    signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Token:Key"])), algorithm: SecurityAlgorithms.HmacSha256) 
-                );
-
-                return Ok(new {token = new JwtSecurityTokenHandler().WriteToken(token)  });
             }
 
             return BadRequest();
@@ -133,12 +139,5 @@ namespace FinanceTracker.Controllers
             return BadRequest();
         }
 
-        // [HttpPost]
-        // [Route("api/token/logout")]
-        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        // public async Task<IActionResult> logout()
-        // {
-        //     await _signInManager.SignInAsync();
-        // }
     }
 }
