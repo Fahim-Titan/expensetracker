@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
               <label for="date-field">Date of {{FormName}}</label>
-              <input type="date" id="date-field" name="date-field" class="form-control" ngModel #Date="ngModel">
+              <input type="date" id="date-field" name="date" class="form-control" ngModel #Date="ngModel">
               <!-- <span class="help-block">Description</span> -->
             </div>
             <div class="form-group">
@@ -56,6 +56,57 @@
               <i class="fa fa-ban"></i> Reset</button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Transactions
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Date</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let transaction of transactionHistory">
+              <td>{{transaction.Name}}</td>
+              <td>{{transaction.Type}}</td>
+              <td>{{transaction.Description}}</td>
+              <td>{{transaction.Date | date: 'fullDate'}}</td>
+              <td>{{transaction.Amount}}</td>
+              <!-- <td><button (click)="delete(asset.Id)">Delete</button></td> -->
+            </tr>
+          </tbody>
+        </table>
+        <!-- <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#">Prev</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul> -->
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 import { AssetService } from './../../../services/asset.service';
 import { TransactionService } from './../../../services/transaction.service';
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-transaction',
@@ -12,12 +13,19 @@ export class TransactionComponent implements OnInit {
   private _showForm = false;
   private FormName= '';
   private assetDropDown: any;
+  private transactionHistory;
   constructor(private _transactionService: TransactionService, private _assetService: AssetService) { }
 
   ngOnInit() {
     this._assetService.GetAssetList().subscribe(
       res => {
         this.assetDropDown = res;
+      }
+    )
+    this._transactionService.GetTransactionHistory().subscribe(
+      res => {
+        this.transactionHistory = res;
+        console.log(this.transactionHistory);
       }
     )
   }

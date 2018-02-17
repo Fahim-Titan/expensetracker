@@ -14,8 +14,8 @@ export class TransactionService {
     });
   }
 
-  GetTransactionHistory(t) {
-    return this.http.post(this.root + this.url + '/list', t, {
+  GetTransactionHistory() {
+    return this.http.post(this.root + this.url + '/list', null, {
       headers: new HttpHeaders().set('Content-Type', 'Application/Json')
         .set('authorization', this.getToken())
     });

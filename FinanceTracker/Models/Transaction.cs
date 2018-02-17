@@ -18,7 +18,13 @@ namespace FinanceTracker.Models
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public virtual ApplicationUser user { get; set; }
-    }    
+
+
+        public Transaction()
+        {
+            Asset asset = new Asset();
+        }
+    }
 
     public enum TransactionType
     {
@@ -26,5 +32,7 @@ namespace FinanceTracker.Models
         Income,
         Transfer,
         Loan
-    } 
+    }
+
+
 }

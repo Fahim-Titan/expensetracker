@@ -39,7 +39,17 @@ namespace FinanceTracker.Controllers
             var user = await _userManager.FindByEmailAsync(email);
             if (user !=null)
             {
-                var userTransactionList = await _context.Transactions.Where(t => t.UserId == user.Id).ToListAsync();
+                var userTransactionList = await _context.Transactions.Where(t => t.UserId == user.Id).Select(item =>
+                new Transaction 
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Description = item.Description,
+                    Type = item.Type,
+                    Date = item.Date,
+                    Amount = item.Amount,
+                    AssetId = item.AssetId
+                }).ToListAsync();
                 if (userTransactionList == null)
                 {
                     return NoContent();
@@ -68,7 +78,7 @@ namespace FinanceTracker.Controllers
                 transaction.UserId = user.Result.Id;
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok(JsonConvert.SerializeObject(transaction));
             }
             return BadRequest();
         }
