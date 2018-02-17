@@ -21,11 +21,13 @@ export class LoginComponent {
   }
 
   processLogin(l) {
-    console.log(l.value);
+    // console.log(l.value);
     this._userService.loginUser(l.value).
     subscribe(response => {
       localStorage.setItem('token', response['token']);
+      localStorage.setItem('userName', response['userName']);
       this.router.navigate(['dashboard']);
+      console.log(response['userName']);
     },
     (error: Response) => {
       this.loginError = true;

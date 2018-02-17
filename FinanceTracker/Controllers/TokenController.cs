@@ -82,8 +82,8 @@ namespace FinanceTracker.Controllers
                         signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Token:Key"])),
                                 SecurityAlgorithms.HmacSha256)
                     );
-
-                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+                    var UserName = user.UserName;
+                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token), UserName });
                 }
                 else
                 {
@@ -128,8 +128,8 @@ namespace FinanceTracker.Controllers
                         signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Token:Key"])),
                                 SecurityAlgorithms.HmacSha256)
                     );
-
-                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+                    var UserName = user.UserName;
+                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token), UserName });
                 }
                 else{
                     return NotFound();

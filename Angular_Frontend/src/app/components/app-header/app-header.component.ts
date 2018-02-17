@@ -5,7 +5,7 @@ import { Component, ElementRef } from '@angular/core';
   templateUrl: './app-header.component.html'
 })
 export class AppHeader {
-
+  private UserName;
   constructor(private el: ElementRef) { }
 
   //wait for the component to render completely
@@ -18,5 +18,7 @@ export class AppHeader {
     }
     // remove the empty element(the host)
     parentElement.removeChild(nativeElement);
+
+    this.UserName = localStorage.getItem('userName');
   }
 }
