@@ -1,10 +1,11 @@
-E:\Workspace\NET CORE\Test4\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.deps.json
-E:\Workspace\NET CORE\Test4\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.runtimeconfig.json
-E:\Workspace\NET CORE\Test4\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.runtimeconfig.dev.json
-E:\Workspace\NET CORE\Test4\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.dll
-E:\Workspace\NET CORE\Test4\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.pdb
-E:\Workspace\NET CORE\Test4\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.csproj.CoreCompileInputs.cache
-E:\Workspace\NET CORE\Test4\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.AssemblyInfoInputs.cache
-E:\Workspace\NET CORE\Test4\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.AssemblyInfo.cs
-E:\Workspace\NET CORE\Test4\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.dll
-E:\Workspace\NET CORE\Test4\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.pdb
+E:\Workspace\expensetracker\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.deps.json
+E:\Workspace\expensetracker\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.runtimeconfig.json
+E:\Workspace\expensetracker\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.runtimeconfig.dev.json
+E:\Workspace\expensetracker\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.dll
+E:\Workspace\expensetracker\FinanceTracker\bin\Debug\netcoreapp2.0\FinanceTracker.pdb
+E:\Workspace\expensetracker\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.csprojAssemblyReference.cache
+E:\Workspace\expensetracker\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.csproj.CoreCompileInputs.cache
+E:\Workspace\expensetracker\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.AssemblyInfoInputs.cache
+E:\Workspace\expensetracker\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.AssemblyInfo.cs
+E:\Workspace\expensetracker\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.dll
+E:\Workspace\expensetracker\FinanceTracker\obj\Debug\netcoreapp2.0\FinanceTracker.pdb
