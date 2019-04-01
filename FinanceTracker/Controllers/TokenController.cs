@@ -13,6 +13,7 @@ using System.Text;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using FinanceTracker.Services;
 
 namespace FinanceTracker.Controllers
 {
@@ -23,12 +24,14 @@ namespace FinanceTracker.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly TokenService _tokenService;
 
-        public TokenController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
+        public TokenController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, TokenService token)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _tokenService = token;
         }
 
         [HttpGet]
@@ -65,25 +68,9 @@ namespace FinanceTracker.Controllers
                     {
                         return Unauthorized();
                     }
-                    var claims = new[]
-                    {
-                        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Email, user.Email)
-                    };
-
-                    var token = new JwtSecurityToken
-                    (
-                        issuer: _configuration["Token:Issuer"],
-                        audience: _configuration["Token:Audience"],
-                        claims: claims,
-                        expires: DateTime.UtcNow.AddMinutes(5),
-                        notBefore: DateTime.UtcNow,
-                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Token:Key"])),
-                                SecurityAlgorithms.HmacSha256)
-                    );
+                    
                     var UserName = user.UserName;
-                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token), UserName });
+                    return Ok(new { token = _tokenService.GetToken(user), UserName });
                 }
                 else
                 {
@@ -103,33 +90,15 @@ namespace FinanceTracker.Controllers
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user != null)
                 {
-
                     var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, lockoutOnFailure: false);
 
                     if (!result.Succeeded)
                     {
                         return Unauthorized();
                     }
-
-                    var claims = new[]
-                    {
-                        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Email, user.Email)
-                    };
-
-                    var token = new JwtSecurityToken
-                    (
-                        issuer: _configuration["Token:Issuer"],
-                        audience: _configuration["Token:Audience"],
-                        claims: claims,
-                        expires: DateTime.UtcNow.AddMinutes(5),
-                        notBefore: DateTime.UtcNow,
-                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Token:Key"])),
-                                SecurityAlgorithms.HmacSha256)
-                    );
+                   
                     var UserName = user.UserName;
-                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token), UserName });
+                    return Ok(new { token = _tokenService.GetToken(user), UserName });
                 }
                 else{
                     return NotFound();
