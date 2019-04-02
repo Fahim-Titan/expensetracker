@@ -46,7 +46,7 @@ namespace FinanceTracker.Controllers
         }
 
         [HttpPost]
-        [Route("api/token/register")]
+        [Route("api/register")]
         public async Task<IActionResult> Register([FromBody] RegistrationModel model)
         {
             if (ModelState.IsValid)
@@ -82,8 +82,8 @@ namespace FinanceTracker.Controllers
         }
 
         [HttpPost]
-        [Route("api/token/get")]
-        public async Task<IActionResult> Get([FromBody] LoginModel model)
+        [Route("api/login")]
+        public async Task<IActionResult> Signin([FromBody] LoginModel model)
         {
             if (ModelState.IsValid)
             {
