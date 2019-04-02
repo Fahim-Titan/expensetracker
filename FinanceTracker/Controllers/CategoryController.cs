@@ -43,9 +43,6 @@ namespace FinanceTracker.Controllers
                 return NoContent();
             }
             return Unauthorized();
-
-            // var applicationDbContext = _context.Categories.Include(c => c.user);
-            // return View(await applicationDbContext.ToListAsync());
         }
 
         // POST: Category/Create
